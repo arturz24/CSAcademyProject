@@ -1,0 +1,5 @@
+﻿#ccccff niebieski
+#ff9966 rozowo pomaranczowy
+#cc9999 fioletowo rozowy
+#990000 ciemny czerwony
+#666699

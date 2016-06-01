@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using System.Reflection;
 
 namespace CSAcademyProject
 {
@@ -34,7 +35,7 @@ namespace CSAcademyProject
         {
             try
             {
-                using (StreamReader reader = new StreamReader(".\\block_types.txt"))
+                using (StreamReader reader = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("CSAcademyProject.block_types.txt")))
                 {
                     while (reader.EndOfStream == false)
                     {

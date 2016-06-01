@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
+using System.Reflection;
 
 namespace CSAcademyProject.Loaders
 {
@@ -26,7 +24,7 @@ namespace CSAcademyProject.Loaders
 
             try
             {
-                using (StreamReader reader = new StreamReader(".\\colors.txt"))
+                using (StreamReader reader = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("CSAcademyProject.colors.txt")))
                 {
                     while (reader.EndOfStream == false)
                     {
