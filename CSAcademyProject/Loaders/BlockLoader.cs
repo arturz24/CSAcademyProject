@@ -35,7 +35,8 @@ namespace CSAcademyProject
         {
             try
             {
-                using (StreamReader reader = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("CSAcademyProject.block_types.txt")))
+                using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("CSAcademyProject.Resources.block_types.txt"))
+                using (StreamReader reader = new StreamReader(stream))
                 {
                     while (reader.EndOfStream == false)
                     {
@@ -86,7 +87,7 @@ namespace CSAcademyProject
             }
         }
 
-        public DrawableBlock GetRandomBlock(int sizeX, int sizeY,int margin)
+        public DrawableBlock GetRandomBlock(int sizeX, int sizeY, int margin)
         {
             if (BlockPrototypes.Count > 0)
             {
@@ -100,12 +101,12 @@ namespace CSAcademyProject
         }
 
 
-        private bool[][] TransformBlockStructure(bool[][] structure,int numberOfRotations)
+        private bool[][] TransformBlockStructure(bool[][] structure, int numberOfRotations)
         {
             //TO BE CHANGED
             //NAIVE APPROACH
 
-                
+
             return structure;
         }
 

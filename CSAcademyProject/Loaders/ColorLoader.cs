@@ -9,7 +9,7 @@ namespace CSAcademyProject.Loaders
     class ColorLoader
     {
         public List<Color> Colors { get; private set; }
-        public Random Rand{ get; private set; }
+        public Random Rand { get; private set; }
         private static ColorLoader instance;
 
         private ColorLoader()
@@ -21,10 +21,10 @@ namespace CSAcademyProject.Loaders
 
         private void LoadColors()
         {
-
             try
             {
-                using (StreamReader reader = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("CSAcademyProject.colors.txt")))
+                using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("CSAcademyProject.Resources.colors.txt"))
+                using (StreamReader reader = new StreamReader(stream))
                 {
                     while (reader.EndOfStream == false)
                     {
@@ -37,7 +37,7 @@ namespace CSAcademyProject.Loaders
             {
                 Console.Error.WriteLine("Error during loadnig colors");
             }
-            
+
         }
 
         public static ColorLoader Instance
