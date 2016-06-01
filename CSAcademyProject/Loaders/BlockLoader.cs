@@ -13,22 +13,24 @@ namespace CSAcademyProject
 {
     class BlockLoader
     {
-        public List<bool[][]> BlockPrototypes { get; private set; }
-        public Random Random { get; private set; }
+        private List<bool[][]> BlockPrototypes { get; set; }
+        private Random Random { get; set; }
         public static BlockLoader instance;
-
-        public static bool[][] StructureTemplate;
 
         private BlockLoader()
         {
             BlockPrototypes = new List<bool[][]>();
-
-            StructureTemplate = new bool[1][];
-            StructureTemplate[0] = new bool[1];
-            StructureTemplate[0][0] = true;
-
             Random = new Random();
+            AddStructureTemplate();
             LoadBlocks();
+        }
+
+        private void AddStructureTemplate()
+        {
+            bool[][] structureTemplate = new bool[1][];
+            structureTemplate[0] = new bool[1];
+            structureTemplate[0][0] = true;
+            BlockPrototypes.Add(structureTemplate);
         }
 
         private void LoadBlocks()
@@ -89,25 +91,9 @@ namespace CSAcademyProject
 
         public DrawableBlock GetRandomBlock(int sizeX, int sizeY, int margin)
         {
-            if (BlockPrototypes.Count > 0)
-            {
-                int index = Random.Next(BlockPrototypes.Count);
-                int transformation = Random.Next(4);
-                return new DrawableBlock(TransformBlockStructure(BlockPrototypes[index], transformation), sizeX, sizeY,
-                    margin, ColorLoader.Instance.GetRandomColor());
-            }
-            else
-                return new DrawableBlock(StructureTemplate, sizeX, sizeY, margin, ColorLoader.Instance.GetRandomColor());
-        }
-
-
-        private bool[][] TransformBlockStructure(bool[][] structure, int numberOfRotations)
-        {
-            //TO BE CHANGED
-            //NAIVE APPROACH
-
-
-            return structure;
+            int index = Random.Next(BlockPrototypes.Count);
+            return new DrawableBlock(BlockPrototypes[index], sizeX, sizeY,
+                margin, ColorLoader.Instance.GetRandomColor());
         }
 
     }

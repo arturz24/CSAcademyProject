@@ -18,25 +18,26 @@ namespace CSAcademyProject
 
     class GameEngine
     {
-        public Canvas DrawingArea { get; }
-        public Canvas WindowContent { get; }
-        public Label PointsLabel { get; }
-        public MainGridOperator MainGrid { get; private set; }
-        public BlockListOperator BlockList { get; private set; }
+        private Canvas DrawingArea { get; set; }
+        private Canvas WindowContent { get; set; }
+        private Label PointsLabel { get; set; }
+        private MainGridOperator MainGrid { get; set; }
+        private BlockListOperator BlockList { get; set; }
 
         public DrawableBlock CurrentSelectedBlock { get; private set; }
-        public int CursorPositionX;
-        public int CursorPositionY;
-        public int CurrentPoints { get; private set; }
-        public bool GameOver { get; private set; }
+        private int CursorPositionX { get; set; }
+        private int CursorPositionY { get; set; }
+        private int CurrentPoints { get; set; }
+        private bool GameOver { get; set; }
 
-        private static Action EmptyDelegate = delegate () { };
+        private static Action EmptyDelegate { get; set; }
 
         public GameEngine(Canvas window, Canvas drawingArea, Label pointsLabel)
         {
             DrawingArea = drawingArea;
             PointsLabel = pointsLabel;
             WindowContent = window;
+            EmptyDelegate = delegate () { };
             StartNewGame();
         }
 
@@ -78,9 +79,9 @@ namespace CSAcademyProject
         private void StartNewGame()
         {
             MainGrid = new MainGridOperator(this, (WindowParameters.WIDTH - MainGridOperator.WIDTH) / 2, 20);
-            BlockList = new BlockListOperator(this, (WindowParameters.WIDTH - BlockListOperator.WIDTH) / 2, 450);
+            BlockList = new BlockListOperator(this, (WindowParameters.WIDTH - BlockListOperator.WIDTH) / 2, MainGridOperator.HEIGHT + 50);
             CurrentPoints = 0;
-            PointsLabel.Content = "Points:0";
+            PointsLabel.Content = WindowParameters.NO_POINTS;
             GameOver = false;
             Draw(false);
         }
@@ -154,7 +155,6 @@ namespace CSAcademyProject
         public void Draw(bool instantDraw)
         {
             DrawingArea.Children.Clear();
-
             MainGrid.Draw(DrawingArea);
             BlockList.Draw(DrawingArea);
 
@@ -162,13 +162,16 @@ namespace CSAcademyProject
             {
                 DisplayCurrentBlock();
             }
+
             if (GameOver == true)
             {
                 DisplayGameOverMessage();
             }
 
             if (instantDraw == true)
+            {
                 DrawingArea.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
+            }
         }
 
         private void DisplayGameOverMessage()

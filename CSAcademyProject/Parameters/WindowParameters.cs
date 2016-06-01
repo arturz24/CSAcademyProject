@@ -12,7 +12,9 @@ namespace CSAcademyProject
         public const int WIDTH = 600;
         public const int HEIGHT = 600;
 
-        public static Color BLACK = Color.FromRgb(0, 0, 0);
-        public static Color WHITE = Color.FromRgb(255, 255, 255);
+
+        public const int POINTS_FONT_SIZE = 30;
+        public const string NO_POINTS = "Points: 0";
+        public const string MAIN_FONT = "Candara";
     }
 }

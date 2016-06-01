@@ -11,12 +11,16 @@ namespace CSAcademyProject.Loaders
         public List<Color> Colors { get; private set; }
         public Random Rand { get; private set; }
         private static ColorLoader instance;
+        public Color White { get; }
+        public Color Black { get; }
 
         private ColorLoader()
         {
             Colors = new List<Color>();
             Rand = new Random();
             LoadColors();
+            White = Color.FromRgb(255, 255, 255);
+            Black = Color.FromRgb(0, 0, 0);
         }
 
         private void LoadColors()

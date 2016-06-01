@@ -1,4 +1,5 @@
-﻿using CSAcademyProject.Operators;
+﻿using CSAcademyProject.Loaders;
+using CSAcademyProject.Operators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace CSAcademyProject
         public MainGridOperator(GameEngine gameOperator, int positionX, int positionY)
         {
             Grid = new DrawableGrid(ROW_NUMBER, COLUMN_NUMBER, ELEMENT_WIDTH,
-                ELEMENT_HEIGHT, WindowParameters.BLACK);
+                ELEMENT_HEIGHT, ColorLoader.Instance.Black);
 
             SetCells();
 

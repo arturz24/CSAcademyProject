@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CSAcademyProject.Loaders;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,29 +27,28 @@ namespace CSAcademyProject
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
             Label pointsLabel = new Label();
-            pointsLabel.FontSize = 30;
-            pointsLabel.FontFamily = new FontFamily("Candara");
-            pointsLabel.Content = "Points: 0";
-
+            pointsLabel.FontSize = WindowParameters.POINTS_FONT_SIZE;
+            pointsLabel.FontFamily = new FontFamily(WindowParameters.MAIN_FONT);
+            pointsLabel.Content = WindowParameters.NO_POINTS;
             pointsLabel.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
             Canvas.SetLeft(pointsLabel, (WindowParameters.WIDTH  - pointsLabel.DesiredSize.Width) / 2);
             Canvas.SetTop(pointsLabel, 10);
            
             
             Canvas drawingArea = new Canvas();
-            gameOperator = new GameEngine(windowContent,drawingArea,pointsLabel);
-
             drawingArea.Width = WindowParameters.WIDTH;
             drawingArea.Height = WindowParameters.HEIGHT;
-            drawingArea.Background = new SolidColorBrush(Color.FromRgb(255,255,255));
+            drawingArea.Background = new SolidColorBrush(ColorLoader.Instance.White);
             Canvas.SetTop(drawingArea, 50);
+
+            gameOperator = new GameEngine(windowContent, drawingArea, pointsLabel);
             drawingArea.MouseDown += gameOperator.HandleMouseDown;
             drawingArea.MouseUp += gameOperator.HandleMouseUp;
             drawingArea.MouseMove += gameOperator.HandleMouseMove;
 
             windowContent.Children.Add(pointsLabel);
             windowContent.Children.Add(drawingArea);
-            
+
         }
 
     }

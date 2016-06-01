@@ -1,4 +1,5 @@
 ﻿using CSAcademyProject.Drawables;
+using CSAcademyProject.Loaders;
 using CSAcademyProject.Operators;
 using System;
 using System.Collections.Generic;
@@ -77,7 +78,7 @@ namespace CSAcademyProject
 
         public override void Draw(Canvas drawingArea)
         {
-            UIElement grid = new DrawableGrid(1, BLOCK_SLOTS, BLOCK_SLOT_WIDTH, BLOCK_SLOT_HEIGHT, WindowParameters.BLACK).GetDrawable();
+            UIElement grid = new DrawableGrid(1, BLOCK_SLOTS, BLOCK_SLOT_WIDTH, BLOCK_SLOT_HEIGHT, ColorLoader.Instance.Black).GetDrawable();
 
             Canvas.SetLeft(grid, PositionX);
             Canvas.SetTop(grid, PositionY);
