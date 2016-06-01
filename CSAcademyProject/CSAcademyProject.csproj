@@ -55,10 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Drawables\DrawableBlock.cs" />
     <Compile Include="Drawables\DrawableEndMessage.cs" />
     <Compile Include="Evaluators\GameEvaluator.cs" />
     <Compile Include="Loaders\BlockLoader.cs" />
-    <Compile Include="Drawables\DrawableBlock.cs" />
     <Compile Include="Loaders\ColorLoader.cs" />
     <Compile Include="Operators\AbstractOperator.cs" />
     <Compile Include="Operators\BlockListOperator.cs" />
