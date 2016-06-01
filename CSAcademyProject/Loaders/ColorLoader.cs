@@ -8,23 +8,25 @@ namespace CSAcademyProject.Loaders
 {
     class ColorLoader
     {
-        public List<Color> Colors { get; private set; }
-        public Random Rand { get; private set; }
         private static ColorLoader instance;
-        public Color White { get; }
-        public Color Black { get; }
+
+        private List<Color> Colors { get;  set; }
+        private Random Rand { get;  set; }
+        public Color White { get; private set; }
+        public Color Black { get; private set; }
 
         private ColorLoader()
         {
             Colors = new List<Color>();
             Rand = new Random();
             LoadColors();
-            White = Color.FromRgb(255, 255, 255);
-            Black = Color.FromRgb(0, 0, 0);
         }
 
         private void LoadColors()
         {
+            White = Color.FromRgb(255, 255, 255);
+            Black = Color.FromRgb(0, 0, 0);
+
             try
             {
                 using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("CSAcademyProject.Resources.colors.txt"))
@@ -59,12 +61,9 @@ namespace CSAcademyProject.Loaders
         public Color GetRandomColor()
         {
             if (Colors.Count > 0)
-            {
-                int colorIndex = Rand.Next(Colors.Count);
-                return Colors[colorIndex];
-            }
+                return Colors[Rand.Next(Colors.Count)];
             else
-                return Color.FromRgb(0, 0, 0);
+                return Black;
         }
     }
 }

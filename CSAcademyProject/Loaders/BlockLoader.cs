@@ -50,7 +50,6 @@ namespace CSAcademyProject
                         sizeX = Convert.ToInt32(line.Split(' ')[0]);
                         sizeY = Convert.ToInt32(line.Split(' ')[1]);
 
-                        //DrawableBlock newBlock = new DrawableBlock(sizeX, sizeY, Color.FromRgb(0, 0, 0));
                         bool[][] blockStructure = new bool[sizeY][];
                         for (int i = 0; i < sizeY; i++)
                             blockStructure[i] = new bool[sizeX];

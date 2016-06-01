@@ -1,4 +1,5 @@
 ﻿using CSAcademyProject.Drawables;
+using CSAcademyProject.Evaluators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,19 +9,6 @@ using System.Threading.Tasks;
 
 namespace CSAcademyProject
 {
-
-    class LinesToRemove
-    {
-        public List<int> RowIndexes { get;}
-        public List<int> ColumnIndexes { get; }
-
-        public LinesToRemove()
-        {
-            RowIndexes = new List<int>();
-            ColumnIndexes = new List<int>();
-        }
-    }
-
     class GameEvaluator
     {
         public static LinesToRemove GetLinesToRemove(DrawableCell[][] gridCells, int sizeX, int sizeY)

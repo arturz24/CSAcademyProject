@@ -73,6 +73,7 @@
     <Compile Include="Drawables\DrawableBlock.cs" />
     <Compile Include="Drawables\DrawableEndMessage.cs" />
     <Compile Include="Evaluators\GameEvaluator.cs" />
+    <Compile Include="Evaluators\LinesToRemove.cs" />
     <Compile Include="Loaders\BlockLoader.cs" />
     <Compile Include="Loaders\ColorLoader.cs" />
     <Compile Include="Operators\AbstractOperator.cs" />

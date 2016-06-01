@@ -18,16 +18,20 @@ namespace CSAcademyProject
         public const int BLOCK_SLOTS = 3;
         public const int BLOCK_SLOT_WIDTH = 120;
         public const int BLOCK_SLOT_HEIGHT = 120;
+        public const int BLOCK_WIDTH = 20;
+        public const int BLOCK_HEIGHT = 20;
+        public const int BLOCK_MARGIN = 1;
 
         public const int WIDTH = BLOCK_SLOT_WIDTH * BLOCK_SLOTS;
         public const int HEIGHT = BLOCK_SLOT_HEIGHT;
 
-        public int PositionX { get; }
-        public int PositionY { get; }
-        public DrawableBlock[] CurrentBlocks { get; }
-        public bool[] CurrentBlokcsAvailability { get; private set; }
+        public int PositionX { get; private set; }
+        public int PositionY { get; private set; }
+        public DrawableBlock[] CurrentBlocks { get; private set; }
+        private bool[] CurrentBlokcsAvailability { get; set; }
 
-        public GameEngine RefToGameEngine { get; }
+        private GameEngine RefToGameEngine { get; set; }
+        private DrawableGrid Grid { get; set; }
 
         public BlockListOperator(GameEngine gameOperator, int positionX, int positionY)
         {
@@ -38,6 +42,7 @@ namespace CSAcademyProject
             ChooseCurrentBlocks();
             
             RefToGameEngine = gameOperator;
+            Grid = new DrawableGrid(1, BLOCK_SLOTS, BLOCK_SLOT_WIDTH, BLOCK_SLOT_HEIGHT, ColorLoader.Instance.Black);
         }
 
         public void RemoveCurrentBlock()
@@ -70,7 +75,7 @@ namespace CSAcademyProject
         {
             for (int i = 0; i < BLOCK_SLOTS; i++)
             {
-                CurrentBlocks[i] = BlockLoader.Instance.GetRandomBlock(20, 20,1);
+                CurrentBlocks[i] = BlockLoader.Instance.GetRandomBlock(BLOCK_WIDTH, BLOCK_HEIGHT, BLOCK_MARGIN);
                 CurrentBlokcsAvailability[i] = true;
             }
         }
@@ -78,11 +83,9 @@ namespace CSAcademyProject
 
         public override void Draw(Canvas drawingArea)
         {
-            UIElement grid = new DrawableGrid(1, BLOCK_SLOTS, BLOCK_SLOT_WIDTH, BLOCK_SLOT_HEIGHT, ColorLoader.Instance.Black).GetDrawable();
-
-            Canvas.SetLeft(grid, PositionX);
-            Canvas.SetTop(grid, PositionY);
-            drawingArea.Children.Add(grid);
+            Canvas.SetLeft(Grid.GetDrawable(), PositionX);
+            Canvas.SetTop(Grid.GetDrawable(), PositionY);
+            drawingArea.Children.Add(Grid.GetDrawable());
 
             for (int i = 0; i < BLOCK_SLOTS; i++)
             {
@@ -121,7 +124,7 @@ namespace CSAcademyProject
 
         public override void HandleMouseUp(int x, int y)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
     }

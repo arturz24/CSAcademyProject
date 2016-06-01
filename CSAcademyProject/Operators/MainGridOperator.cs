@@ -1,4 +1,5 @@
-﻿using CSAcademyProject.Loaders;
+﻿using CSAcademyProject.Evaluators;
+using CSAcademyProject.Loaders;
 using CSAcademyProject.Operators;
 using System;
 using System.Collections.Generic;
@@ -22,13 +23,15 @@ namespace CSAcademyProject
         public const int WIDTH = COLUMN_NUMBER * ELEMENT_WIDTH;
         public const int HEIGHT = ROW_NUMBER * ELEMENT_HEIGHT;
         public const int BLOCK_MARGIN = 2;
+        public const int BLOCK_RADIUS = ELEMENT_WIDTH/10;
 
-        public DrawableGrid Grid { get; }
-        public DrawableCell[][] Cells { get; private set; }
         public int PositionX { get; }
         public int PositionY { get; }
 
-        public GameEngine RefToGameEngine { get; }
+        private DrawableGrid Grid { get; set; }
+        private DrawableCell[][] Cells { get; set; }
+        
+        private GameEngine RefToGameEngine { get; set; }
 
         public MainGridOperator(GameEngine gameOperator, int positionX, int positionY)
         {
@@ -74,7 +77,7 @@ namespace CSAcademyProject
 
         public override void HandleMouseDown(int x, int y)
         {
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public override void HandleMouseUp(int x, int y)
@@ -86,10 +89,13 @@ namespace CSAcademyProject
                 if (GameEvaluator.CanBlockBePlaced(Cells, startX, startY, RefToGameEngine.CurrentSelectedBlock) == true)
                 {
                     PlaceSelectedBlock(x / ELEMENT_WIDTH, y / ELEMENT_HEIGHT);
+
                     int points = GameEvaluator.GetBlockPoints(RefToGameEngine.CurrentSelectedBlock);
                     RefToGameEngine.Notify(NotificationMessage.BLOCK_IS_PLACED, null);
+
                     LinesToRemove linesToRemove = GameEvaluator.GetLinesToRemove(Cells, ROW_NUMBER, COLUMN_NUMBER);
                     points = points + GameEvaluator.EvaluateGrid(RefToGameEngine, Cells, linesToRemove);
+
                     RefToGameEngine.Notify(NotificationMessage.UPDATE_POINTS, points);
 
                     if (GameEvaluator.IsMoveLeft(Cells, COLUMN_NUMBER, ROW_NUMBER, RefToGameEngine.GetBlockList()) == false)
@@ -115,7 +121,7 @@ namespace CSAcademyProject
                 {
                     if (structure[i][j] == true)
                         Cells[startY + i][startX + j] = new DrawableCell(ELEMENT_WIDTH - 2 * BLOCK_MARGIN,
-                            ELEMENT_HEIGHT - 2 * BLOCK_MARGIN, ELEMENT_WIDTH / 10,
+                            ELEMENT_HEIGHT - 2 * BLOCK_MARGIN, BLOCK_RADIUS,
                             RefToGameEngine.CurrentSelectedBlock.BlockColor);
                 }
             }
