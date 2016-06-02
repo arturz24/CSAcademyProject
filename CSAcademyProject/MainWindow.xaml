@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="2D Tetris" Height="697"
         Width="610"
-        ResizeMode="NoResize">
-    <Canvas Name="windowContent">
-        
-    </Canvas>
+        ResizeMode="NoResize"
+        >
+    
+    <Canvas Name="windowContent"></Canvas>
 
 </Window>

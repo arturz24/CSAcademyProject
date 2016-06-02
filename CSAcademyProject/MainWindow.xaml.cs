@@ -13,17 +13,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Reflection;
+using System.IO;
 
 namespace CSAcademyProject
 {
 
     public partial class MainWindow : Window
     {
+        public const int LABEL_TOP_MARGIN = 10;
+        public const int DRAWING_AREA_TOP_MARGIN = 50;
+
         private GameEngine gameOperator;
 
         public MainWindow()
         {
             InitializeComponent();
+            Stream iconStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(WindowParameters.ICON_STREAM);
+            this.Icon = BitmapFrame.Create(iconStream);
             WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
             Label pointsLabel = new Label();
@@ -32,14 +39,14 @@ namespace CSAcademyProject
             pointsLabel.Content = WindowParameters.NO_POINTS;
             pointsLabel.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
             Canvas.SetLeft(pointsLabel, (WindowParameters.WIDTH  - pointsLabel.DesiredSize.Width) / 2);
-            Canvas.SetTop(pointsLabel, 10);
+            Canvas.SetTop(pointsLabel, LABEL_TOP_MARGIN);
            
             
             Canvas drawingArea = new Canvas();
             drawingArea.Width = WindowParameters.WIDTH;
             drawingArea.Height = WindowParameters.HEIGHT;
             drawingArea.Background = new SolidColorBrush(ColorLoader.Instance.White);
-            Canvas.SetTop(drawingArea, 50);
+            Canvas.SetTop(drawingArea, DRAWING_AREA_TOP_MARGIN);
 
             gameOperator = new GameEngine(windowContent, drawingArea, pointsLabel);
             drawingArea.MouseDown += gameOperator.HandleMouseDown;

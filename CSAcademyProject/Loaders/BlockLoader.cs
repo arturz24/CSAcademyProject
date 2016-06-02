@@ -37,7 +37,7 @@ namespace CSAcademyProject
         {
             try
             {
-                using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("CSAcademyProject.Resources.block_types.txt"))
+                using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(WindowParameters.BLOCKS_STREAM))
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     while (reader.EndOfStream == false)

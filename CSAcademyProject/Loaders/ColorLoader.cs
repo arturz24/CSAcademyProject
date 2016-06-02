@@ -29,7 +29,7 @@ namespace CSAcademyProject.Loaders
 
             try
             {
-                using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("CSAcademyProject.Resources.colors.txt"))
+                using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(WindowParameters.COLORS_STREAM))
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     while (reader.EndOfStream == false)
